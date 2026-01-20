@@ -1,0 +1,84 @@
+{
+  "categories": [
+    {
+      "name": "脚本",
+      "items": [
+        {
+          "name": "优选IP",
+          "icon": "D:/workspace/github/launcher/icons/cloudflare.png",
+          "path": "D:/workspace/github/cfip-prefer/优选IP管理器.lnk",
+          "workdir": "D:/workspace/github/cfip-prefer"
+        },
+        {
+          "name": "Fofa",
+          "icon": "D:/workspace/github/launcher/icons/fofa.png",
+          "path": "D:/workspace/github/fofa-catcher/Fofa数据采集器.lnk",
+          "workdir": "D:/workspace/github/fofa-catcher"
+        },
+        {
+          "name": "代理",
+          "icon": "D:/workspace/github/launcher/icons/socks5.png",
+          "path": "D:/workspace/github/proxies/代理管理器.lnk",
+          "workdir": "D:/workspace/github/proxies"
+        }
+      ]
+    },
+    {
+      "name": "应用程序",
+      "items": [
+        {
+          "name": "记事本",
+          "icon": "D:/workspace/github/launcher/icons/应用程序.png",
+          "path": "notepad.exe",
+          "workdir": ""
+        },
+        {
+          "name": "计算器",
+          "icon": "D:/workspace/github/launcher/icons/应用程序.png",
+          "path": "calc.exe",
+          "workdir": ""
+        }
+      ]
+    },
+    {
+      "name": "开发工具",
+      "items": [
+        {
+          "name": "命令提示符",
+          "icon": "D:/workspace/github/launcher/icons/开发.png",
+          "path": "cmd.exe",
+          "workdir": ""
+        },
+        {
+          "name": "PowerShell",
+          "icon": "D:/workspace/github/launcher/icons/开发.png",
+          "path": "powershell.exe",
+          "workdir": ""
+        }
+      ]
+    },
+    {
+      "name": "系统工具",
+      "items": [
+        {
+          "name": "任务管理器",
+          "icon": "D:/workspace/github/launcher/icons/系统.png",
+          "path": "taskmgr.exe",
+          "workdir": ""
+        },
+        {
+          "name": "注册表编辑器",
+          "icon": "D:/workspace/github/launcher/icons/系统.png",
+          "path": "regedit.exe",
+          "workdir": ""
+        },
+        {
+          "name": "资源监视器",
+          "icon": "D:/workspace/github/launcher/icons/系统.png",
+          "path": "resmon.exe",
+          "workdir": ""
+        }
+      ]
+    }
+  ]
+}
