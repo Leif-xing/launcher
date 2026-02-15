@@ -7,6 +7,13 @@ from typing import Optional
 
 class Launcher:
     """程序启动器"""
+
+    DEBUG = False
+
+    @staticmethod
+    def _debug(msg: str) -> None:
+        if Launcher.DEBUG:
+            print(msg)
     
     @staticmethod
     def launch(path: str, workdir: Optional[str] = None) -> bool:
@@ -33,13 +40,31 @@ class Launcher:
                 workdir = os.getcwd()
         
         # 判断文件类型并执行
-        print(f"[DEBUG] 启动文件: {path}")
-        print(f"[DEBUG] 工作目录: {workdir}")
-        print(f"[DEBUG] 文件类型: {os.path.splitext(path)[1]}")
+        Launcher._debug(f"[DEBUG] 启动文件: {path}")
+        Launcher._debug(f"[DEBUG] 工作目录: {workdir}")
+        Launcher._debug(f"[DEBUG] 文件类型: {os.path.splitext(path)[1]}")
         
-        if path.endswith('.py'):
+        normalized = path.strip()
+        normalized_lower = normalized.lower()
+
+        # Windows 下的控制台程序（cmd / powershell）在 GUI 程序中用 shell=True 容易“一闪而过”，这里强制新控制台启动
+        if sys.platform == 'win32' and normalized_lower in {"cmd", "cmd.exe"}:
+            subprocess.Popen(
+                ["cmd.exe"],
+                cwd=workdir,
+                creationflags=subprocess.CREATE_NEW_CONSOLE
+            )
+        elif sys.platform == 'win32' and normalized_lower in {"powershell", "powershell.exe", "pwsh", "pwsh.exe"}:
+            # -NoExit 保持窗口不自动退出
+            exe = "pwsh.exe" if normalized_lower.startswith("pwsh") else "powershell.exe"
+            subprocess.Popen(
+                [exe, "-NoExit"],
+                cwd=workdir,
+                creationflags=subprocess.CREATE_NEW_CONSOLE
+            )
+        elif path.endswith('.py'):
             # Python 脚本
-            print(f"[DEBUG] 识别为 Python 脚本")
+            Launcher._debug(f"[DEBUG] 识别为 Python 脚本")
             subprocess.Popen(
                 [sys.executable, path],
                 cwd=workdir,
@@ -47,7 +72,7 @@ class Launcher:
             )
         elif path.endswith(('.bat', '.cmd')):
             # 批处理脚本
-            print(f"[DEBUG] 识别为批处理脚本")
+            Launcher._debug(f"[DEBUG] 识别为批处理脚本")
             # 规范化路径为系统分隔符（Windows下为反斜杠）
             path = os.path.normpath(path)
             script_name = os.path.basename(path)
@@ -55,7 +80,7 @@ class Launcher:
             # 使用 shell=True 并手动构建命令字符串，以避免 subprocess 自动转义引号的问题
             # start "Title" /max cmd.exe /k "path_to_script"
             cmd_command = f'start "{script_name}" /max cmd.exe /k "{path}"'
-            print(f"[DEBUG] 执行命令: {cmd_command}")
+            Launcher._debug(f"[DEBUG] 执行命令: {cmd_command}")
             
             subprocess.Popen(
                 cmd_command,
@@ -64,7 +89,7 @@ class Launcher:
             )
         elif path.endswith('.lnk'):
             # 快捷方式
-            print(f"[DEBUG] 识别为快捷方式")
+            Launcher._debug(f"[DEBUG] 识别为快捷方式")
             if sys.platform == 'win32':
                 os.startfile(path)
             else:
@@ -72,7 +97,7 @@ class Launcher:
                 subprocess.Popen(['xdg-open', path])
         elif path.endswith('.exe') or not os.path.splitext(path)[1]:
             # 可执行文件或系统命令
-            print(f"[DEBUG] 识别为可执行文件或系统命令")
+            Launcher._debug(f"[DEBUG] 识别为可执行文件或系统命令")
             subprocess.Popen(
                 path,
                 cwd=workdir,
@@ -80,13 +105,13 @@ class Launcher:
             )
         else:
             # 其他类型，尝试用系统默认方式打开
-            print(f"[DEBUG] 使用系统默认方式打开")
+            Launcher._debug(f"[DEBUG] 使用系统默认方式打开")
             if sys.platform == 'win32':
                 os.startfile(path)
             else:
                 subprocess.Popen(['xdg-open', path])
         
-        print(f"[DEBUG] 启动命令已执行")
+        Launcher._debug(f"[DEBUG] 启动命令已执行")
         return True
     
     @staticmethod

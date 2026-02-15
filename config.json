@@ -28,15 +28,21 @@
       "items": [
         {
           "name": "记事本",
-          "icon": "D:/workspace/github/launcher/icons/应用程序.png",
+          "icon": "D:/workspace/github/launcher/icons/记事本.png",
           "path": "notepad.exe",
           "workdir": ""
         },
         {
           "name": "计算器",
-          "icon": "D:/workspace/github/launcher/icons/应用程序.png",
+          "icon": "D:/workspace/github/launcher/icons/计算器.png",
           "path": "calc.exe",
           "workdir": ""
+        },
+        {
+          "name": "pgAdmin4",
+          "icon": "D:/workspace/github/launcher/icons/pgadmin.png",
+          "path": "D:\\app\\PostgreSql\\pgAdmin 4\\runtime\\pgAdmin4.exe",
+          "workdir": "D:\\app\\PostgreSql\\pgAdmin 4\\runtime\\"
         }
       ]
     },
@@ -45,13 +51,13 @@
       "items": [
         {
           "name": "命令提示符",
-          "icon": "D:/workspace/github/launcher/icons/开发.png",
+          "icon": "D:/workspace/github/launcher/icons/命令提示符.png",
           "path": "cmd.exe",
           "workdir": ""
         },
         {
           "name": "PowerShell",
-          "icon": "D:/workspace/github/launcher/icons/开发.png",
+          "icon": "D:/workspace/github/launcher/icons/powershell.png",
           "path": "powershell.exe",
           "workdir": ""
         }
@@ -62,19 +68,19 @@
       "items": [
         {
           "name": "任务管理器",
-          "icon": "D:/workspace/github/launcher/icons/系统.png",
+          "icon": "D:/workspace/github/launcher/icons/系统工具.png",
           "path": "taskmgr.exe",
           "workdir": ""
         },
         {
           "name": "注册表编辑器",
-          "icon": "D:/workspace/github/launcher/icons/系统.png",
+          "icon": "D:/workspace/github/launcher/icons/系统工具.png",
           "path": "regedit.exe",
           "workdir": ""
         },
         {
           "name": "资源监视器",
-          "icon": "D:/workspace/github/launcher/icons/系统.png",
+          "icon": "D:/workspace/github/launcher/icons/系统工具.png",
           "path": "resmon.exe",
           "workdir": ""
         }

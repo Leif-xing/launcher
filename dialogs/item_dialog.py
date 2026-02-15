@@ -1,6 +1,7 @@
 """启动项添加/编辑对话框"""
 import customtkinter as ctk
 from tkinter import filedialog
+import os
 from typing import Dict, List, Optional
 
 
@@ -175,9 +176,24 @@ class ItemDialog(ctk.CTkToplevel):
         """浏览图标文件"""
         # 临时取消置顶，让文件对话框能显示在前面
         self.attributes("-topmost", False)
+        # 默认打开项目目录下的 icons 子目录；如果输入框里已有路径，则优先使用其所在目录
+        icons_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "icons"))
+        current_value = self.icon_entry.get().strip()
+        initialdir = None
+        if current_value:
+            # 可能是相对路径或绝对路径
+            candidate = os.path.abspath(current_value)
+            if os.path.isdir(candidate):
+                initialdir = candidate
+            elif os.path.isfile(candidate):
+                initialdir = os.path.dirname(candidate)
+        if not initialdir and os.path.isdir(icons_dir):
+            initialdir = icons_dir
+
         filename = filedialog.askopenfilename(
             parent=self,
             title="选择图标",
+            initialdir=initialdir,
             filetypes=[
                 ("图像文件", "*.png *.jpg *.jpeg *.ico *.bmp"),
                 ("所有文件", "*.*")
